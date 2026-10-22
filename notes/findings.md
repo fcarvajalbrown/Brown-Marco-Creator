@@ -83,3 +83,11 @@ Derived estimate, order of magnitude only.
 
 Sources: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ , https://arxiv.org/abs/2302.06590 , https://blog.robbowley.net/2026/04/04/metrs-developer-productivity-research-2026-update/ , https://www.wikipedia.org/wiki/O3DE , https://www.openhub.net/p/godotengine
 - Closed with `close_binary` and a snapshot at `snapshots/UnrealEditor-Core.rea-snapshot` (git-ignored). It is 32,627 bytes with 2 evidence records: it keeps the cached query results, not Ghidra's database, so new queries on Core will likely re-run the roughly 10-minute analysis.
+
+## Imports through REA
+
+- A module graph built with `llvm-readobj` was reverted (`97b5f73`): the study order must come from REA.
+- REA has no PE import view: `inspect_binary_layout` covers ELF on Linux only. Imports come from `list_names`, where Ghidra external symbols carry the library, e.g. `TBBMALLOC.DLL::scalable_free` at `EXTERNAL:0x5`, `source: imported`.
+- For Core, `list_names` completed (about 10 min of analysis) but its response (10,549,103 bytes) exceeded REA's 10 MB MCP budget. Retained evidence exported with `export_evidence_bundle` to `snapshots/UnrealEditor-Core.evidence.json` (127,151,029 bytes, git-ignored): 432,320 names, 630 external.
+- Core imports from 35 libraries. Unreal modules: UnrealEditor-TraceLog (33 symbols), UnrealEditor-BuildSettings (10). Third-party: TBBMALLOC (5), WinPixEventRuntime (2). The rest are Windows and MSVC runtime DLLs (KERNEL32 227, MSVCP140 65, USER32 49, DBGHELP 17 and others).
+- Whether Ghidra lists delay-load imports among these externals is not yet established.
