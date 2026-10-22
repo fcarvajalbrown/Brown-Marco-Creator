@@ -82,3 +82,4 @@ Derived estimate, order of magnitude only.
 - Range: about 45 to 120 years at Godot-community pace. Lines are not features, Godot's growth was not linear, and both studies predate current models.
 
 Sources: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ , https://arxiv.org/abs/2302.06590 , https://blog.robbowley.net/2026/04/04/metrs-developer-productivity-research-2026-update/ , https://www.wikipedia.org/wiki/O3DE , https://www.openhub.net/p/godotengine
+- Closed with `close_binary` and a snapshot at `snapshots/UnrealEditor-Core.rea-snapshot` (git-ignored). It is 32,627 bytes with 2 evidence records: it keeps the cached query results, not Ghidra's database, so new queries on Core will likely re-run the roughly 10-minute analysis.
