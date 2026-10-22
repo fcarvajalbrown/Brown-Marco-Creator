@@ -54,6 +54,15 @@ Measured with `find` and `wc` over `D:\EpicGames\UE_5.5\Engine`.
 2. `claude mcp list` from this folder: `rea` connected.
 3. In a session here, call `binary_session` with `{}` and read `tool_availability`, then open one DLL.
 
+## First session with REA
+
+- `binary_session {}` before any target: 77 tools available, 72 `target_required`, 27 `provider_unavailable` (adb, apktool), 21 `provider_missing` (JEB, jadx, sigrok, binwalk and others), 10 `unsupported_host`. Ghidra provider `available`; no missing client requirements.
+- None of `UnrealEditor-Core`, `-CoreUObject`, `-Engine`, `-RenderCore`, `-Renderer` has a PDB beside it. The 540 PDBs in `Binaries\Win64` belong to standalone programs (CrashReportClient, BuildPatchTool and others). Editor module PDBs come from the launcher option "Editor symbols for debugging", not installed.
+- `UnrealEditor-Core.dll` (20,021,528 bytes, SHA-256 `6ac94596...24bc`) records PDB `UnrealEditor-Core.pdb`, GUID `{55A4614C-6E78-418A-B18A-2717DF82C0E3}`, bare file name only, and exports 7,120 decorated C++ names (`llvm-readobj --coff-exports`). Public API names are therefore available without a PDB.
+- Even with the editor symbols installed, REA would not load them: it imports a private copy and neither copies a sibling PDB nor accepts one (`docs/ghidra-provider.md` lines 62-64).
+- Opening Core with `provider_id: ghidra` succeeded, but the first query (`binary_overview`) failed with `provider_timeout`: import plus auto-analysis did not finish within the default 330,000 ms `REA_GHIDRA_STARTUP_TIMEOUT_MS`. Not out of memory. PDB load state was not reported because the handshake never completed. REA removed its temp runtime; no Java process remained.
+- Remedies named by REA: raise `REA_GHIDRA_STARTUP_TIMEOUT_MS` in the registration env, or skip analyzers with `REA_GHIDRA_DISABLED_ANALYZERS`; the MCP client tool-call timeout is separate.
+
 ## Rebuild timeline (parked)
 
 Derived estimate, order of magnitude only.
