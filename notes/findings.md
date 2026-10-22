@@ -37,6 +37,13 @@ Measured with `find` and `wc` over `D:\EpicGames\UE_5.5\Engine`.
 - REA reads binaries only. Removing bloat requires rebuilding from Epic's full source.
 - Default Ghidra heap is 2G; raise `GHIDRA_HEADLESS_MAXMEM` for large DLLs.
 
+## Installed providers
+
+- Ghidra 12.1.4 at `C:\tools\ghidra_12.1.4_PUBLIC`, zip SHA-256 matched the GitHub release digest; `win_x86_64` decompiler present. Ghidra 12.2 was skipped because REA accepts 12.1.x only.
+- Temurin JDK 21.0.12.1+1 at `C:\tools\jdk-21.0.12.1+1`, zip SHA-256 matched the Adoptium API; `java -version` reports 21.0.12.1 LTS.
+- Download zips kept in `C:\tools\dl`.
+- REA doctor not yet run against them.
+
 ## Readiness checks
 
 1. `npx -y rea-agents@6.7.0 doctor --provider ghidra --json` with `GHIDRA_INSTALL_DIR` and `JAVA_HOME` set: expect `"healthy": true`.
