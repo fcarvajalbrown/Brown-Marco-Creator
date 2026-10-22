@@ -64,6 +64,13 @@ Measured with `find` and `wc` over `D:\EpicGames\UE_5.5\Engine`.
 - Remedies named by REA: raise `REA_GHIDRA_STARTUP_TIMEOUT_MS` in the registration env, or skip analyzers with `REA_GHIDRA_DISABLED_ANALYZERS`; the MCP client tool-call timeout is separate. Claude Code moved the call to a background task after 120 s and it kept running, so the client timeout was not the limit.
 - Re-registered at local scope with `REA_GHIDRA_STARTUP_TIMEOUT_MS=1800000` (30 min), full analysis kept, heap still 2G. Command, from Git Bash in this folder: `MSYS_NO_PATHCONV=1 claude mcp add --scope local rea -e 'GHIDRA_INSTALL_DIR=C:\tools\ghidra_12.1.4_PUBLIC' -e 'JAVA_HOME=C:\tools\jdk-21.0.12.1+1' -e REA_GHIDRA_STARTUP_TIMEOUT_MS=1800000 -- cmd.exe /d /c npx -y rea-agents@6.7.0 mcp`. `claude mcp add-json` with the same config was rejected with "Invalid configuration: : Invalid input". `claude mcp list` reports `rea` connected. A running Claude Code session keeps the old env until restarted.
 
+## Core analysis result
+
+- After the restart with the 30-minute limit, Ghidra 12.1.4 finished default auto-analysis of `UnrealEditor-Core.dll` in about 10 minutes (Java started 13:10:44, result before 13:21) on the 2G heap. No out-of-memory.
+- PDB handshake: Ghidra references `UnrealEditor-Core.pdb`, GUID `55a4614c-6e78-418a-b18a-2717df82c0e3`, age 1, version RSDS, load state **unknown**. In practice no PDB was available (none installed, REA does not copy one), so names come from exports and Ghidra's own recovery only.
+- Inventory: image base `0x180000000`; 44,286 procedures; 29,940 defined strings; 10 segments, `.text` 14.2 MB, `.rdata` 4.5 MB, `.data` 10.3 MB, `.pdata` 0.55 MB, plus a 44 KB `.uedbg` section (Unreal-specific debug data section, contents not yet inspected).
+- With 7,120 named exports against 44,286 procedures, at most about 16% of Core's recovered functions carry an original name.
+
 ## Rebuild timeline (parked)
 
 Derived estimate, order of magnitude only.
