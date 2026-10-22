@@ -46,6 +46,8 @@ Measured with `find` and `wc` over `D:\EpicGames\UE_5.5\Engine`.
 - Run REA commands from this folder, never from the REA source checkout: there, `npx rea-agents@6.7.0` resolves to the checkout's own package and fails with "'rea' is not recognized".
 - From the `!` prompt (Git Bash), `cmd /c` is rewritten to a drive path; use Bash env-prefix syntax or `cmd.exe //d //c`.
 
+- Registered: `claude mcp add --scope local rea` with `GHIDRA_INSTALL_DIR` and `JAVA_HOME` env, stored in `~/.claude.json` under project `C:\Projects\ue55-rea`; `claude mcp list` from this folder reports `rea` connected.
+
 ## Readiness checks
 
 1. `npx -y rea-agents@6.7.0 doctor --provider ghidra --json` with `GHIDRA_INSTALL_DIR` and `JAVA_HOME` set: expect `"healthy": true`.
