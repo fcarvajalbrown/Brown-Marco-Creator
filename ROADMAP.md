@@ -8,7 +8,7 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Get each module DLL's imports through `rea search` | Not Started |
+| 1 | Get each module DLL's imports through `rea search` | In Progress |
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Not Started |
@@ -16,16 +16,16 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fails.
 
-## Phase 1: `rea search` (Not Started)
+## Phase 1: `rea search` (In Progress)
 
-Test on TraceLog first; if the result lists imported names in the form `LIBRARY.DLL::name`, run it on every module DLL.
+The TraceLog test passed (see history). Imported data labels are missed; only imported functions count.
 
-1. Search TraceLog's analysed names for imports:
-   `! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' npx -y rea-agents@6.7.0 search 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' "DLL::" --kind procedures --provider ghidra --json > snapshots/TraceLog.search.json`
-   (Without `--kind procedures` the search covers strings only.)
-2. Claude reads `snapshots/TraceLog.search.json` and compares it with Core's 630 externals from `list_names`; pass if imports from Core and other DLLs appear.
-3. If it passes: Claude writes a batch script under `tools/` that runs step 1 on every `UnrealEditor-*.dll` and resumes after an interruption; you start it.
-4. If it fails: record why in `notes/findings.md` and go to Phase 2.
+1. Run REA on every module DLL (resumable; rerun the same line after an interruption):
+   `! python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports`
+2. Claude reads the `finished:` line and any `<Module>.error.txt` in `snapshots/imports`, and records the result in `notes/findings.md`.
+3. Retry only the failed modules:
+   `! python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports --only <Module> <Module>`
+4. If the batch cannot complete: record why and go to Phase 2.
 
 ## Phase 2: `rea inspect-with-objdump` (Not Started)
 
