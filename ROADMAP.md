@@ -21,7 +21,8 @@ Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fai
 Test on TraceLog first; if the result lists imported names in the form `LIBRARY.DLL::name`, run it on every module DLL.
 
 1. Search TraceLog's analysed names for imports:
-   `! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' REA_GHIDRA_STARTUP_TIMEOUT_MS=1800000 npx -y rea-agents@6.7.0 search 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' "DLL::" --provider ghidra --json > snapshots/TraceLog.search.json`
+   `! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' npx -y rea-agents@6.7.0 search 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' "DLL::" --kind procedures --provider ghidra --json > snapshots/TraceLog.search.json`
+   (Without `--kind procedures` the search covers strings only.)
 2. Claude reads `snapshots/TraceLog.search.json` and compares it with Core's 630 externals from `list_names`; pass if imports from Core and other DLLs appear.
 3. If it passes: Claude writes a batch script under `tools/` that runs step 1 on every `UnrealEditor-*.dll` and resumes after an interruption; you start it.
 4. If it fails: record why in `notes/findings.md` and go to Phase 2.
