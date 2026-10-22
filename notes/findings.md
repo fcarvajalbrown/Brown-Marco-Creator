@@ -83,3 +83,13 @@ Derived estimate, order of magnitude only.
 
 Sources: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study/ , https://arxiv.org/abs/2302.06590 , https://blog.robbowley.net/2026/04/04/metrs-developer-productivity-research-2026-update/ , https://www.wikipedia.org/wiki/O3DE , https://www.openhub.net/p/godotengine
 - Closed with `close_binary` and a snapshot at `snapshots/UnrealEditor-Core.rea-snapshot` (git-ignored). It is 32,627 bytes with 2 evidence records: it keeps the cached query results, not Ghidra's database, so new queries on Core will likely re-run the roughly 10-minute analysis.
+
+## Module dependency graph and study order
+
+Criterion chosen: dependency first (bottom-up along the import graph), within a layer most-depended-on first. Built by `tools/module-graph/module_graph.py --engine D:/EpicGames/UE_5.5/Engine --out notes/module-graph.csv`, which reads each `UnrealEditor-*.dll` import table with `llvm-readobj --coff-imports` (direct imports only; delay-loads counted in a separate column) and assigns layers on the strongly connected components. The CSV row order is the study order.
+
+- 498 module DLLs, 16 layers, 2 cycles. Area from the module's `.Build.cs` location: Runtime 321 MB, Editor 257 MB, Developer 98 MB.
+- Foundation chain: TraceLog, BuildSettings (layer 0) -> Core (1, 494 dependents) -> RHI (3) -> CoreUObject (5, 330 dependents) -> RenderCore, InputCore (6) -> SlateCore, Chaos (7) -> Slate, PhysicsCore (8).
+- Above layer 10 sits one cycle of 106 modules (36 Runtime, 53 Editor, 17 Developer, 335 MB) containing Engine, Renderer, Landscape, AudioMixer, AIModule, UMG and UnrealEd, LevelEditor, Kismet, Sequencer. In the editor build these cannot be layered apart.
+- `UnrealEditor-Engine.dll` directly imports editor and developer modules: UnrealEd, Kismet, DerivedDataCache, DesktopPlatform, DeveloperToolSettings, EditorAnalyticsSession, Horde, MaterialUtilities, TextureBuildUtilities, TextureCompressor, ClothingSystemEditorInterface. This is the editor configuration (`WITH_EDITOR`); a shipping game build compiles that code out, so the tangle is an editor-build fact, not proof of shipped bloat.
+- The other cycle is PacketHandler <-> ReliabilityHandlerComponent.
