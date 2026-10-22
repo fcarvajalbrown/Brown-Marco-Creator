@@ -42,7 +42,9 @@ Measured with `find` and `wc` over `D:\EpicGames\UE_5.5\Engine`.
 - Ghidra 12.1.4 at `C:\tools\ghidra_12.1.4_PUBLIC`, zip SHA-256 matched the GitHub release digest; `win_x86_64` decompiler present. Ghidra 12.2 was skipped because REA accepts 12.1.x only.
 - Temurin JDK 21.0.12.1+1 at `C:\tools\jdk-21.0.12.1+1`, zip SHA-256 matched the Adoptium API; `java -version` reports 21.0.12.1 LTS.
 - Download zips kept in `C:\tools\dl`.
-- REA doctor not yet run against them.
+- `rea-agents@6.7.0 doctor --provider ghidra --json`, run from this folder: `"healthy": true`; all ten Ghidra checks pass, including native decompiler and Windows native authority (local NTFS only). Global client registrations report `missing`, which is expected: REA is meant to be registered at local scope only.
+- Run REA commands from this folder, never from the REA source checkout: there, `npx rea-agents@6.7.0` resolves to the checkout's own package and fails with "'rea' is not recognized".
+- From the `!` prompt (Git Bash), `cmd /c` is rewritten to a drive path; use Bash env-prefix syntax or `cmd.exe //d //c`.
 
 ## Readiness checks
 
