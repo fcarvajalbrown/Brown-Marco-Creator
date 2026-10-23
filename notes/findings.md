@@ -96,3 +96,11 @@ Sources: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study
 - REA CLI `search <dll> "DLL::" --provider ghidra --json` on TraceLog ran `search_strings` (literal, case-insensitive), not a procedure-name search, and returned no matches. Output kept at `snapshots/TraceLog.search.json`. The flag that selects procedure names is not yet known.
 - REA CLI `search <dll> "DLL::" --kind procedures --provider ghidra --json` returns imported functions with their library: TraceLog gives 87 (`EXTERNAL:0x1` = `WS2_32.DLL::accept`), from KERNEL32 29, CRT runtime 22, WS2_32 13, VCRUNTIME140 12, CRT heap 7, VCRUNTIME140_1 2, CRT string 1, CRT stdio 1. No Unreal module imports. Imported data labels (type `label` in `list_names`, e.g. Core's `TBBMALLOC.DLL::scalable_allocation_command`) are not procedures and are missed; a DLL imported only for data would not show as a dependency.
 - First full import batch run (started from the session prompt) stopped at 36/498 after AudioCaptureWasapi: the session host killed it while the system was critically low on memory. 38 `search.json` files exist in `snapshots/imports` (including the two smoke-test DLLs), no error files, no Ghidra process left. Rerunning the same line resumes from the next DLL.
+
+## Import batch, second run on a 1 GB Ghidra heap
+
+- Started with `GHIDRA_HEADLESS_MAXMEM=1G` at the `!` prompt with 1.8 GB RAM free.
+- Claude Code stopped it on low system memory after `[84/498] ChaosVehiclesCore ok 53s`. 85 `search.json` files exist (83 of the 498 modules plus the two earlier test files), and there are no `error.txt` files.
+- DLLs 37 to 84 took 32 to 72 s each on the 1 GB heap, and none failed out of memory.
+- After the stop, 1.3 GB RAM was free and no Java process was left.
+- A run at the `!` prompt is stopped whenever system memory gets critically low. Running it in a separate Git Bash window avoids that.
