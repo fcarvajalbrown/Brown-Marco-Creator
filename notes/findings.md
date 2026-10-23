@@ -100,7 +100,7 @@ Sources: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study
 ## Import batch, second run on a 1 GB Ghidra heap
 
 - Started with `GHIDRA_HEADLESS_MAXMEM=1G` at the `!` prompt with 1.8 GB RAM free.
-- Claude Code stopped it on low system memory after `[84/498] ChaosVehiclesCore ok 53s`. 85 `search.json` files exist (83 of the 498 modules plus the two earlier test files), and there are no `error.txt` files.
+- Claude Code stopped it on low system memory after `[84/498] ChaosVehiclesCore ok 53s`. 85 of the 498 modules have a `search.json` (the first 84 in alphabetical order plus TraceLog from the earlier test), and there are no `error.txt` files.
 - DLLs 37 to 84 took 32 to 72 s each on the 1 GB heap, and none failed out of memory.
 - After the stop, 1.3 GB RAM was free and no Java process was left.
 - A run at the `!` prompt is stopped whenever system memory gets critically low. Running it in a separate Git Bash window avoids that.
