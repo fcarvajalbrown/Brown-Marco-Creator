@@ -104,3 +104,15 @@ Sources: https://metr.org/blog/2025-07-10-early-2025-ai-experienced-os-dev-study
 - DLLs 37 to 84 took 32 to 72 s each on the 1 GB heap, and none failed out of memory.
 - After the stop, 1.3 GB RAM was free and no Java process was left.
 - A run at the `!` prompt is stopped whenever system memory gets critically low. Running it in a separate Git Bash window avoids that.
+
+## Import batch, third run attempt (blocked: prerequisites absent)
+
+Checked 2026-10-24 on the desktop (the machine this session ran on). The Phase 1 batch could not start because none of its prerequisites are present here:
+
+- `C:\tools` does not exist, so neither Ghidra 12.1.4 (`C:\tools\ghidra_12.1.4_PUBLIC`) nor JDK 21 (`C:\tools\jdk-21.0.12.1+1`) is installed.
+- There is no `D:` drive on this machine (`[System.IO.DriveInfo]::GetDrives()` returns `C:\` only), so `D:\EpicGames\UE_5.5\Engine\Binaries\Win64` does not exist and there are zero `UnrealEditor-*.dll` targets. No UE install was found under `C:` either.
+- `snapshots/imports` did not exist and held no `search.json`; the 85 files recorded from the second run are not on this machine's disk now.
+
+Because the batch cannot run, Phase 1 steps 2 (read the `finished:` line and errors) and 3 (retry failed modules) have no output to act on and are also blocked.
+
+Unblock: install Ghidra 12.1.4 and JDK 21 under `C:\tools` and mount/populate the UE 5.5 engine at `D:\EpicGames\UE_5.5` (or, if the install moved, update the paths in `ROADMAP.md`, `README.md` and `tools/rea-imports/rea_imports.py` defaults), then rerun `python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports` with `GHIDRA_HEADLESS_MAXMEM=4G`. Not attempted this session: installing the engine or the toolchain is a large, machine-changing step that needs Felipe's decision.

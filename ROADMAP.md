@@ -8,7 +8,7 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Get each module DLL's imports through `rea search` | In Progress |
+| 1 | Get each module DLL's imports through `rea search` | Blocked: prerequisites absent on this machine (see findings) |
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Not Started |
@@ -16,7 +16,9 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fails.
 
-## Phase 1: `rea search` (In Progress)
+## Phase 1: `rea search` (Blocked)
+
+Blocked on this machine: none of the prerequisites are present (checked 2026-10-24). No `C:\tools` (so no Ghidra 12.1.4 and no JDK 21), and no `D:` drive at all (so no `D:\EpicGames\UE_5.5` and no module DLLs). Only `C:\` is mounted; no UE install under `C:` either. The batch cannot start, so steps 2 and 3 have no output to process. Unblock: install Ghidra + JDK under `C:\tools` and mount/populate the UE 5.5 engine (or correct the paths if the install moved), then rerun step 1. Details in `notes/findings.md`.
 
 The TraceLog test passed (see history). Imported data labels are missed; only imported functions count.
 
