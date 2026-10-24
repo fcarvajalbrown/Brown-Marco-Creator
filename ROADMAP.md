@@ -28,6 +28,8 @@ The TraceLog test passed on UE 5.5 (see history). Imported data labels are misse
 3. Retry only the failed modules:
    `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27 --only <Module> <Module>`
 4. If the batch cannot complete: record why and go to Phase 2.
+5. Then the 654 plugin modules, same heap, after the core batch finishes:
+   `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Plugins' --recursive --prefix UE4Editor- --out snapshots/imports-ue4.27-plugins`
 
 ## Phase 2: `rea inspect-with-objdump` (Not Started)
 
