@@ -5,6 +5,7 @@ A C++ game engine and editor built around the Unreal Engine 4.27 workflow, with 
 ![Status](https://img.shields.io/badge/status-planning-orange)
 ![Language](https://img.shields.io/badge/language-C%2B%2B-blue)
 ![Editor UI](https://img.shields.io/badge/editor-Dear%20ImGui-blue)
+![License](https://img.shields.io/badge/license-Apache--2.0-blue)
 ![Platforms](https://img.shields.io/badge/platforms-Windows%20%7C%20Linux%20%7C%20Steam%20Deck-blue)
 
 ## Why
@@ -41,5 +42,7 @@ Planning. Scope, phases and decisions are written down; no engine code yet. The 
 - Roadmap: [ROADMAP.md](ROADMAP.md)
 - Product requirements and phases: [docs/PRD.md](docs/PRD.md)
 - Decisions: [docs/adr](docs/adr/README.md)
+
+Licensed under Apache-2.0, see [LICENSE](LICENSE).
 
 Made by Brøwn Marcó Studios, Santiago, Chile.

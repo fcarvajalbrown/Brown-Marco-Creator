@@ -26,7 +26,8 @@ Out: mobile, iOS, `.uasset` or any other proprietary asset container ([ADR 0003]
 - C++ with Dear ImGui docking for the editor ([ADR 0004](adr/0004-cpp-and-dear-imgui.md)).
 - Imported assets stay as their source files on disk; the Content Browser reads them in place, like Godot and Unity, with derived data kept in a rebuildable cache ([ADR 0003](adr/0003-source-assets-no-container.md)).
 - One editor mode. Landscape, foliage and mesh editing are tools inside it, including modeling tools such as auto UV, like UE4's beta and UE5's modeling mode ([ADR 0005](adr/0005-single-editor-mode.md)).
-- Undecided, each needs an ADR with Felipe's input: licence, graphics API, physics library, build system.
+- Apache-2.0 licence ([ADR 0006](adr/0006-apache-2-licence.md)), Vulkan only at first ([ADR 0007](adr/0007-vulkan-first.md)), Jolt Physics ([ADR 0008](adr/0008-jolt-physics.md)).
+- Undecided, needs an ADR with Felipe's input: build system.
 
 ## Phases
 
