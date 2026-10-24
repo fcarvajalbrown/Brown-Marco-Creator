@@ -36,13 +36,14 @@ def is_complete(path):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run REA's Ghidra procedure search for imported names on every UnrealEditor module DLL, one JSON per DLL, resumable."
+        description="Run REA's Ghidra procedure search for imported names on every engine module DLL, one JSON per DLL, resumable."
     )
     parser.add_argument("--binaries", required=True, type=Path, help="Engine Binaries\\Win64 folder")
     parser.add_argument("--out", required=True, type=Path, help="Folder for <Module>.search.json files")
     parser.add_argument("--ghidra", default=r"C:\tools\ghidra_12.1.4_PUBLIC", help="GHIDRA_INSTALL_DIR")
     parser.add_argument("--java", default=r"C:\tools\jdk-21.0.12.1+1", help="JAVA_HOME")
     parser.add_argument("--timeout-ms", type=int, default=1800000, help="REA_GHIDRA_STARTUP_TIMEOUT_MS")
+    parser.add_argument("--prefix", default="UnrealEditor-", help="Module DLL name prefix, UE4Editor- for UE 4")
     parser.add_argument("--only", nargs="*", default=[], help="Module names to run, e.g. Core CoreUObject")
     args = parser.parse_args()
 
@@ -52,14 +53,14 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     env = rea_environment(args)
 
-    dlls = sorted(args.binaries.glob("UnrealEditor-*.dll"))
+    dlls = sorted(args.binaries.glob(args.prefix + "*.dll"))
     if args.only:
-        wanted = {"UnrealEditor-" + m + ".dll" for m in args.only}
+        wanted = {args.prefix + m + ".dll" for m in args.only}
         dlls = [d for d in dlls if d.name in wanted]
 
     failures = []
     for index, dll in enumerate(dlls, 1):
-        module = dll.stem[len("UnrealEditor-"):]
+        module = dll.stem[len(args.prefix):]
         target = args.out / f"{module}.search.json"
         if is_complete(target):
             print(f"[{index}/{len(dlls)}] {module} done earlier", flush=True)
