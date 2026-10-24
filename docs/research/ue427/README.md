@@ -19,3 +19,7 @@ One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). 
 | Animation Blueprints | [animation-blueprints.md](animation-blueprints.md) |
 | Packaging and cooking | [packaging.md](packaging.md) |
 | Input | [input.md](input.md) |
+| Play In Editor and Simulate | [play-in-editor.md](play-in-editor.md) |
+| Materials and the material editor | [materials.md](materials.md) |
+| Lightmass and global illumination | [lightmass.md](lightmass.md) |
+| Still to write: World Outliner, Sequencer, editor layout and viewport, modeling tools, MetaSound-style audio graph (check what 4.27 itself offers) | Epic's 4.27 slugs not found yet |
