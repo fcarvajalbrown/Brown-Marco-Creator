@@ -8,3 +8,14 @@ One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). 
 | Content Browser | [content-browser.md](content-browser.md) |
 | Blueprint visual scripting | [blueprints.md](blueprints.md) |
 | Level Editor modes (what ADR 0005 replaces) | [editor-modes.md](editor-modes.md) |
+| Details panel | [details-panel.md](details-panel.md) |
+| Level streaming | [level-streaming.md](level-streaming.md) |
+| UMG UI Designer | [umg.md](umg.md) |
+| Behavior trees | [behavior-trees.md](behavior-trees.md) |
+| Hierarchical LOD | [hlod.md](hlod.md) |
+| Physics | [physics.md](physics.md) |
+| Niagara and Cascade | [niagara.md](niagara.md) |
+| Post-process effects and volumes | [post-process.md](post-process.md) |
+| Animation Blueprints | [animation-blueprints.md](animation-blueprints.md) |
+| Packaging and cooking | [packaging.md](packaging.md) |
+| Input | [input.md](input.md) |
