@@ -1,0 +1,3 @@
+[
+  {"tag": "laptop-artifacts", "asset": "bmc-ue427-snapshots.zip", "dest": "study/ue427-rea/snapshots", "unzip": true}
+]
