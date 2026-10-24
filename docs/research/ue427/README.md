@@ -1,6 +1,6 @@
 # UE 4.27 feature notes
 
-One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). Each claim carries a tag: [REA] found by REA in the 4.27 DLLs, [editor] observed in the 4.27 editor, [docs] read in Epic's 4.27 documentation. Epic's docs pages are read with `tools/epic-docs/epic_doc.py`.
+One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). Each claim carries a tag: [REA] found by REA in the 4.27 DLLs, [editor] observed in the 4.27 editor, [docs] read in Epic's 4.27 documentation, [install] read from files in the 4.27.2 install such as plugin descriptors. Epic's docs pages are read with `tools/epic-docs/epic_doc.py`.
 
 | Feature | Note |
 |---|---|

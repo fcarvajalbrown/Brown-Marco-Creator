@@ -1,12 +1,13 @@
-# Modeling Tools mode
+# Modeling Tools Editor Mode
 
-Sources: https://docs.unrealengine.com/4.27/API/Plugins/ModelingToolsEditorMode/index.html (4.27 API reference) and https://dev.epicgames.com/documentation/en-us/unreal-engine/modeling-mode-in-unreal-engine (current, unversioned guide)
+Sources: the UE 4.27.2 install's plugin descriptors `Engine/Plugins/Experimental/ModelingToolsEditorMode/ModelingToolsEditorMode.uplugin` and `Engine/Plugins/Experimental/MeshModelingToolset/MeshModelingToolset.uplugin`; API index https://docs.unrealengine.com/4.27/API/Plugins/ModelingToolsEditorMode/index.html
 
-- The 4.27 API reference lists a ModelingToolsEditorMode plugin; no 4.27 user guide for it was found. [docs]
-- The current guide describes Modeling Mode as a toolset for creating, sculpting and editing geometry: topology edits, UV creation, multiple material assignments, collision editing and texture baking. It may differ from 4.27. [docs, UE5 page]
-- In the current guide the mode is enabled through Edit > Plugins > Modeling Tools Editor Mode and has panels for Tool Category, Tool Palette, Tool Properties and Quick Settings. [docs, UE5 page]
+- Modeling Tools Editor Mode is a beta plugin under Experimental: "Modeling Tools Mode includes a suite of interactive tools for creating and editing meshes in the Editor". [install]
+- It depends on the Mesh Modeling Toolset (beta): "A set of modules implementing 3D mesh creation and editing based on the Interactive Tools Framework", plus StylusInput. [install]
+- The toolset's modules: ModelingComponents, ModelingOperators, ModelingOperatorsEditorOnly, MeshModelingTools, MeshModelingToolsEditorOnly; it depends on GeometryProcessing, ProxyLODPlugin and HairStrands. [install]
+- The API exposes UModelingToolsEditorModeSettings, FModelingToolsEditorMode and FModelingToolsEditorModeToolkit. [docs]
 
 ## For Brown Marco Creator
 
-Phase L. The 4.27 behaviour needs the editor or REA on the plugin's DLLs; UE5's guide only sets the feature list Felipe asked for (auto UV and the like). Tools live in the single mode of [ADR 0005](../../adr/0005-single-editor-mode.md).
+Phase L. The user guide page for 4.27 is not found yet; the tool list (auto UV and others) should come from REA on `UE4Editor-MeshModelingTools.dll` once the plugin batch runs in `ue55-rea`.
 
