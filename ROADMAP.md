@@ -10,7 +10,7 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Get each module DLL's imports through `rea search` | In Progress: 398 core modules done, 654 plugin modules not started |
+| 1 | Get each module DLL's imports through `rea search` | Done: 398 core modules, 0 failed (plugin modules deferred by Felipe: essentials only) |
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Not Started |
@@ -28,7 +28,7 @@ The TraceLog test passed on UE 5.5 (see history). Imported data labels are misse
 3. Retry only the failed modules:
    `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27 --only <Module> <Module>`
 4. If the batch cannot complete: record why and go to Phase 2.
-5. Then the 654 plugin modules, same heap, after the core batch finishes:
+5. Deferred by Felipe (essentials only): the 654 plugin modules, same heap, if a later study needs them:
    `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Plugins' --recursive --prefix UE4Editor- --out snapshots/imports-ue4.27-plugins`
 
 ## Phase 2: `rea inspect-with-objdump` (Not Started)
