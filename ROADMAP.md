@@ -31,7 +31,7 @@ The TraceLog test passed on UE 5.5 (see history). Imported data labels are misse
 
 ## Phase 2: `rea inspect-with-objdump` (Not Started)
 
-REA wraps GNU objdump but does not install it. The documented operations are `file_headers`, `section_headers`, `symbols`, `relocations`, `dwarf`, `disassemble`; none is documented as the PE import table, so this is a test.
+Felipe approved installing WinLibs binutils (step 1) only if the Phase 1 batch fails outright, and only if C: has 20 GB or more free right before the install; otherwise Phase 2 is recorded blocked. REA wraps GNU objdump but does not install it. The documented operations are `file_headers`, `section_headers`, `symbols`, `relocations`, `dwarf`, `disassemble`; none is documented as the PE import table, so this is a test.
 
 1. Install GNU binutils (open source, WinLibs):
    `! winget install --id BrechtSanders.WinLibs.POSIX.UCRT -e`
