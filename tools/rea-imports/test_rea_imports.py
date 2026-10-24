@@ -12,6 +12,11 @@ def test_select_dlls():
         assert [d.name for d in select_dlls(folder, "UE4Editor-", [])] == ["UE4Editor-Core.dll", "UE4Editor-Engine.dll"]
         assert [d.name for d in select_dlls(folder, "UnrealEditor-", [])] == ["UnrealEditor-Core.dll"]
         assert [d.name for d in select_dlls(folder, "UE4Editor-", ["Engine"])] == ["UE4Editor-Engine.dll"]
+        nested = folder / "Plugins" / "Foo" / "Binaries" / "Win64"
+        nested.mkdir(parents=True)
+        (nested / "UE4Editor-Foo.dll").touch()
+        assert [d.name for d in select_dlls(folder, "UE4Editor-", [])] == ["UE4Editor-Core.dll", "UE4Editor-Engine.dll"]
+        assert [d.name for d in select_dlls(folder, "UE4Editor-", [], recursive=True)] == ["UE4Editor-Core.dll", "UE4Editor-Engine.dll", "UE4Editor-Foo.dll"]
 
 
 if __name__ == "__main__":

@@ -34,8 +34,8 @@ def is_complete(path):
         return False
 
 
-def select_dlls(binaries, prefix, only):
-    dlls = sorted(binaries.glob(prefix + "*.dll"))
+def select_dlls(binaries, prefix, only, recursive=False):
+    dlls = sorted(binaries.glob(("**/" if recursive else "") + prefix + "*.dll"), key=lambda d: d.name)
     if only:
         wanted = {prefix + m + ".dll" for m in only}
         dlls = [d for d in dlls if d.name in wanted]
@@ -52,6 +52,7 @@ def main():
     parser.add_argument("--java", default=r"C:\tools\jdk-21.0.12.1+1", help="JAVA_HOME")
     parser.add_argument("--timeout-ms", type=int, default=1800000, help="REA_GHIDRA_STARTUP_TIMEOUT_MS")
     parser.add_argument("--prefix", default="UnrealEditor-", help="Module DLL name prefix, UE4Editor- for UE 4")
+    parser.add_argument("--recursive", action="store_true", help="Search subfolders too, e.g. Engine/Plugins for plugin modules")
     parser.add_argument("--only", nargs="*", default=[], help="Module names to run, e.g. Core CoreUObject")
     args = parser.parse_args()
 
@@ -61,7 +62,7 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     env = rea_environment(args)
 
-    dlls = select_dlls(args.binaries, args.prefix, args.only)
+    dlls = select_dlls(args.binaries, args.prefix, args.only, args.recursive)
 
     failures = []
     for index, dll in enumerate(dlls, 1):
