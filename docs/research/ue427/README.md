@@ -27,4 +27,4 @@ One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). 
 | Audio | [audio.md](audio.md) |
 | Working with content | [content-pipeline.md](content-pipeline.md) |
 | World Outliner | [world-outliner.md](world-outliner.md) |
-| Still to write: Modeling Tools mode | Epic's 4.27 slug not found yet |
+| Modeling Tools mode | [modeling-tools.md](modeling-tools.md) |
