@@ -1,6 +1,6 @@
 # ue55-rea
 
-Study of Unreal Engine 5.5 from its installed DLLs (`D:\EpicGames\UE_5.5\Engine\Binaries\Win64`), with every fact taken through REA and Ghidra. The long-term aim is to find legacy code worth removing. That removal needs Epic's full GitHub source, which this install does not have: the launcher ships headers and DLLs only.
+Study of Unreal Engine from its installed DLLs, with every fact taken through REA and Ghidra. The project switched from UE 5.5 to **UE 4.27.2**, installed at `C:\Program Files\Epic Games\UE_4.27`; its module DLLs are in `Engine\Binaries\Win64` and are named `UE4Editor-*.dll` (UE 5 uses `UnrealEditor-*.dll`). The repo keeps the name `ue55-rea`. The long-term aim is to find legacy code worth removing. That removal needs Epic's full GitHub source, which this install does not have: the launcher ships headers and DLLs only.
 
 | File | What it holds |
 |---|---|
@@ -63,16 +63,16 @@ Two settings you may need later:
 Start it:
 
 ```
-! python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports
+! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27
 ```
 
-To keep it independent of the session, open Git Bash yourself, `cd /c/Projects/ue55-rea`, and run the same line without the `!`. Progress then prints in that window as `[n/498] Module ok 54s`.
+To keep it independent of the session, open Git Bash yourself, `cd /c/Projects/ue55-rea`, and run the same line without the `!`. Progress then prints in that window as `[n/N] Module ok 54s`. `--prefix` defaults to `UnrealEditor-` for UE 5 installs; UE 4 needs `--prefix UE4Editor-`. Keep the heap at 4G, never higher.
 
 Check progress from the prompt:
 
 ```
-! ls snapshots/imports/*.search.json | wc -l
-! ls snapshots/imports/*.error.txt
+! ls snapshots/imports-ue4.27/*.search.json | wc -l
+! ls snapshots/imports-ue4.27/*.error.txt
 ```
 
 Pause it. This stops the batch together with the node and Ghidra processes it started:
@@ -88,10 +88,10 @@ Resume: run the start line again. Finished DLLs are skipped. The DLL that was in
 Retry only the ones that failed:
 
 ```
-! python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports --only Core CoreUObject
+! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27 --only Core CoreUObject
 ```
 
-Timing so far: small DLLs take 32 to 172 s, Core took about 10 min. The first eight averaged 77 s each, so the full 498 is likely 10 hours or more, mostly in the big modules (Engine is 77 MB, almost four times Core).
+Timing on UE 5.5: small DLLs take 32 to 172 s, Core took about 10 min. The first eight averaged 77 s each, so the full 498 is likely 10 hours or more, mostly in the big modules (Engine is 77 MB, almost four times Core).
 
 ## Single-DLL commands
 
@@ -100,13 +100,13 @@ Swap the DLL name at the end of the path. Each writes a JSON you can hand back f
 Overview (segments, procedure and string counts, PDB state):
 
 ```
-! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' npx -y rea-agents@6.7.0 analyze 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' --provider ghidra --json > snapshots/TraceLog.analyze.json
+! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' npx -y rea-agents@6.7.0 analyze 'C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor-TraceLog.dll' --provider ghidra --json > snapshots/TraceLog.analyze.json
 ```
 
 Imported functions, with the DLL each comes from:
 
 ```
-! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' npx -y rea-agents@6.7.0 search 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' "DLL::" --kind procedures --provider ghidra --json > snapshots/TraceLog.search.json
+! GHIDRA_INSTALL_DIR='C:\tools\ghidra_12.1.4_PUBLIC' JAVA_HOME='C:\tools\jdk-21.0.12.1+1' npx -y rea-agents@6.7.0 search 'C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor-TraceLog.dll' "DLL::" --kind procedures --provider ghidra --json > snapshots/TraceLog.search.json
 ```
 
 `search` looks at strings unless you pass `--kind procedures`. For a big DLL add `REA_GHIDRA_STARTUP_TIMEOUT_MS=1800000` to the front.
@@ -123,8 +123,8 @@ Command list and per-command options:
 ```
 ! winget install --id BrechtSanders.WinLibs.POSIX.UCRT -e
 ! objdump --version
-! npx -y rea-agents@6.7.0 inspect-with-objdump 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' file_headers --json > snapshots/TraceLog.objdump-headers.json
-! npx -y rea-agents@6.7.0 inspect-with-objdump 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' symbols --json > snapshots/TraceLog.objdump-symbols.json
+! npx -y rea-agents@6.7.0 inspect-with-objdump 'C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor-TraceLog.dll' file_headers --json > snapshots/TraceLog.objdump-headers.json
+! npx -y rea-agents@6.7.0 inspect-with-objdump 'C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor-TraceLog.dll' symbols --json > snapshots/TraceLog.objdump-symbols.json
 ```
 
 WinLibs is open source; restart the terminal after installing so `objdump` is on `PATH`. REA documents no PE import-table option for objdump, so this is a test and may give nothing useful.

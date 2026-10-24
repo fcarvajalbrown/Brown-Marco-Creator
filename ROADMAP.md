@@ -1,6 +1,8 @@
-# UE 5.5 study with REA: roadmap
+# Unreal Engine study with REA: roadmap
 
-Goal: learn how UE 5.5 works from the installed DLLs under `D:\EpicGames\UE_5.5\Engine\Binaries\Win64`, every fact through REA, then find legacy bloat. Findings: `notes/findings.md`. Finished items: `docs/ROADMAP-HISTORY.md`.
+Goal: learn how Unreal Engine works from its installed DLLs, every fact through REA, then find legacy bloat. Findings: `notes/findings.md`. Finished items: `docs/ROADMAP-HISTORY.md`.
+
+Engine version: the project switched from UE 5.5 to **UE 4.27.2**, installed at `C:\Program Files\Epic Games\UE_4.27` (module DLLs in `Engine\Binaries\Win64`, named `UE4Editor-*.dll`). The repo keeps its name `ue55-rea`. UE 5.5 results recorded before the switch stay in `notes/findings.md` for reference.
 
 Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line per action. Outputs go to `snapshots/` (git-ignored).
 
@@ -8,7 +10,7 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Get each module DLL's imports through `rea search` | Blocked: prerequisites absent on this machine (see findings) |
+| 1 | Get each module DLL's imports through `rea search` | In Progress |
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Not Started |
@@ -16,17 +18,15 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fails.
 
-## Phase 1: `rea search` (Blocked)
+## Phase 1: `rea search` (In Progress)
 
-Blocked on this machine: none of the prerequisites are present (checked 2026-10-24). No `C:\tools` (so no Ghidra 12.1.4 and no JDK 21), and no `D:` drive at all (so no `D:\EpicGames\UE_5.5` and no module DLLs). Only `C:\` is mounted; no UE install under `C:` either. The batch cannot start, so steps 2 and 3 have no output to process. Unblock: install Ghidra + JDK under `C:\tools` and mount/populate the UE 5.5 engine (or correct the paths if the install moved), then rerun step 1. Details in `notes/findings.md`.
-
-The TraceLog test passed (see history). Imported data labels are missed; only imported functions count.
+The TraceLog test passed on UE 5.5 (see history). Imported data labels are missed; only imported functions count. Ghidra heap is `GHIDRA_HEADLESS_MAXMEM=4G`, never higher.
 
 1. Run REA on every module DLL (resumable; rerun the same line after an interruption):
-   `! python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports`
-2. Claude reads the `finished:` line and any `<Module>.error.txt` in `snapshots/imports`, and records the result in `notes/findings.md`.
+   `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27`
+2. Claude reads the `finished:` line and any `<Module>.error.txt` in `snapshots/imports-ue4.27`, and records the result in `notes/findings.md`.
 3. Retry only the failed modules:
-   `! python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports --only <Module> <Module>`
+   `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27 --only <Module> <Module>`
 4. If the batch cannot complete: record why and go to Phase 2.
 
 ## Phase 2: `rea inspect-with-objdump` (Not Started)
@@ -38,9 +38,9 @@ REA wraps GNU objdump but does not install it. The documented operations are `fi
 2. Restart the terminal so `objdump` is on `PATH`, then check it:
    `! objdump --version`
 3. Try the file headers on TraceLog:
-   `! npx -y rea-agents@6.7.0 inspect-with-objdump 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' file_headers --json > snapshots/TraceLog.objdump-headers.json`
+   `! npx -y rea-agents@6.7.0 inspect-with-objdump 'C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor-TraceLog.dll' file_headers --json > snapshots/TraceLog.objdump-headers.json`
 4. Try the symbols on TraceLog:
-   `! npx -y rea-agents@6.7.0 inspect-with-objdump 'D:\EpicGames\UE_5.5\Engine\Binaries\Win64\UnrealEditor-TraceLog.dll' symbols --json > snapshots/TraceLog.objdump-symbols.json`
+   `! npx -y rea-agents@6.7.0 inspect-with-objdump 'C:\Program Files\Epic Games\UE_4.27\Engine\Binaries\Win64\UE4Editor-TraceLog.dll' symbols --json > snapshots/TraceLog.objdump-symbols.json`
 5. Claude reads both files; pass if either names the imported DLLs. Then a batch as in Phase 1 step 3; otherwise record and go to Phase 3.
 
 ## Phase 3: MCP, one DLL at a time (Not Started)

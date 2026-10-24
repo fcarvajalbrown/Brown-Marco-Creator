@@ -7,13 +7,13 @@ The desktop shortcut "ue55-rea" opens this folder (C:\Projects\ue55-rea).
    If that entry is missing, open Git Bash from the Start menu and type:
    cd /c/Projects/ue55-rea
 
-2. Check free RAM first (2 GB or more is enough for the 1 GB heap)
+2. Check free RAM first (5 GB or more for the 4 GB heap)
    powershell -NoProfile -Command '$o=Get-CimInstance Win32_OperatingSystem; "{0:N1} GB free" -f ($o.FreePhysicalMemory/1MB)'
 
 3. Start or resume the batch (finished DLLs are skipped)
-   GHIDRA_HEADLESS_MAXMEM=1G python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports
+   GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27
 
-   Each line it prints looks like: [85/498] ChaosVehiclesEngine ok 53s
+   Each line it prints looks like: [85/N] ChaosVehiclesEngine ok 53s
    Leave the window open until it prints the "finished:" line.
 
 4. Pause it (from another Git Bash window)
