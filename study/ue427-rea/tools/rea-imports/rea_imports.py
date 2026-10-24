@@ -7,7 +7,7 @@ import sys
 import time
 from pathlib import Path
 
-REA_PACKAGE = "rea-agents@6.7.0"
+REA_ENTRY = r"C:\tools\rea-agents-pnpm\node_modules\rea-agents\scripts\rea.mjs"
 IMPORT_PATTERN = "DLL::"
 
 
@@ -19,9 +19,9 @@ def rea_environment(args):
     return env
 
 
-def search_imports(npx, dll, env, pattern=IMPORT_PATTERN):
+def search_imports(rea, dll, env, pattern=IMPORT_PATTERN):
     return subprocess.run(
-        [npx, "-y", REA_PACKAGE, "search", str(dll), pattern,
+        [*rea, "search", str(dll), pattern,
          "--kind", "procedures", "--provider", "ghidra", "--json"],
         capture_output=True, text=True, encoding="utf-8", env=env,
     )
@@ -60,11 +60,15 @@ def main():
     parser.add_argument("--only", nargs="*", default=[], help="Module names to run, in this order, e.g. Core CoreUObject")
     parser.add_argument("--order", type=Path, help="Run every module of a study-order.md table, in its order")
     parser.add_argument("--pattern", default=IMPORT_PATTERN, help="Literal procedure-name pattern to search")
+    parser.add_argument("--rea", type=Path, default=Path(REA_ENTRY), help="REA CLI entry script, run with node")
     args = parser.parse_args()
 
-    npx = shutil.which("npx")
-    if not npx:
-        sys.exit("npx not found on PATH")
+    node = shutil.which("node")
+    if not node:
+        sys.exit("node not found on PATH")
+    if not args.rea.is_file():
+        sys.exit(f"REA entry not found: {args.rea}")
+    rea = [node, str(args.rea)]
     args.out.mkdir(parents=True, exist_ok=True)
     env = rea_environment(args)
 
@@ -78,7 +82,7 @@ def main():
             print(f"[{index}/{len(dlls)}] {module} done earlier", flush=True)
             continue
         started = time.monotonic()
-        result = search_imports(npx, dll, env, args.pattern)
+        result = search_imports(rea, dll, env, args.pattern)
         seconds = round(time.monotonic() - started)
         if result.returncode == 0:
             target.write_text(result.stdout, encoding="utf-8")
