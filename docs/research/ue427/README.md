@@ -26,4 +26,5 @@ One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). 
 | Sequencer | [sequencer.md](sequencer.md) |
 | Audio | [audio.md](audio.md) |
 | Working with content | [content-pipeline.md](content-pipeline.md) |
-| Still to write: World Outliner, Modeling Tools mode | Epic's 4.27 slugs not found yet |
+| World Outliner | [world-outliner.md](world-outliner.md) |
+| Still to write: Modeling Tools mode | Epic's 4.27 slug not found yet |
