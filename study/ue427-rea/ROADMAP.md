@@ -14,7 +14,7 @@ Commands run from `C:\Projects\Brown-Marco-Creator\study\ue427-rea` at the `!` p
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Done: 398 modules in 18 layers, [notes/study-order.md](notes/study-order.md) |
-| 5 | Study modules in that order with REA | In Progress |
+| 5 | Study modules in that order with REA | Blocked on Felipe: REA runs through `npx` are denied in unattended sessions; step 1 is ready to run at the `!` prompt |
 
 Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fails.
 
@@ -60,6 +60,15 @@ Layer the modules bottom-up from the REA import data; within a layer, most-depen
 `! python -I tools/study-order/study_order.py --imports snapshots/imports-ue4.27 --out notes/study-order.md`
 Check: `! cd tools/study-order && python test_study_order.py`
 
-## Phase 5: study (In Progress)
+## Phase 5: study (Blocked on Felipe)
 
 Per module, in order: `search_procedures`, `analyze_function`, `procedure_pseudo_code`, `get_call_graph`, `xrefs` on named exports; findings to `notes/findings.md`.
+
+Blocked: an unattended session was denied every `npx -y rea-agents@6.7.0` call by its permissions, so no REA query ran. Steps 1 and 2 are written and checked offline; the REA side of step 1 is untested.
+
+1. Name survey, in study order, resumable (same heap rule as Phase 1; rerun the same line after an interruption):
+   `! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --order notes/study-order.md --pattern '::' --out snapshots/names-ue4.27`
+2. Per-module table of each module's own named procedures and top scopes (seconds; can run while step 1 is still going):
+   `! python -I tools/study-order/module_surface.py --order notes/study-order.md --names snapshots/names-ue4.27 --out notes/module-surface.md`
+   Checks: `! cd tools/rea-imports && python test_rea_imports.py` and `! cd tools/study-order && python test_module_surface.py`
+3. Claude reads `notes/module-surface.md` in order and runs `function`, `xrefs` and `trace` on the top-scope procedures of each module, findings per module to `notes/findings.md`.
