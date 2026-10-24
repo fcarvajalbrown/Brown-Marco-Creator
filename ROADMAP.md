@@ -10,7 +10,7 @@ Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line 
 
 | # | Item | Status |
 |---|---|---|
-| 1 | Get each module DLL's imports through `rea search` | In Progress |
+| 1 | Get each module DLL's imports through `rea search` | In Progress: 398 core modules done, 654 plugin modules not started |
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Not Started |
