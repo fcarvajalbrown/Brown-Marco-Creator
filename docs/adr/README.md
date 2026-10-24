@@ -10,3 +10,5 @@
 | [0006](0006-apache-2-licence.md) | Apache-2.0 licence | Proposed |
 | [0007](0007-vulkan-first.md) | Vulkan only at first | Proposed |
 | [0008](0008-jolt-physics.md) | Jolt Physics | Proposed |
+| [0009](0009-cmake.md) | CMake | Proposed |
+| [0010](0010-asset-cache-and-sidecars.md) | Rebuildable asset cache and plain-text import sidecars | Proposed |
