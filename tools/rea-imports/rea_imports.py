@@ -34,6 +34,14 @@ def is_complete(path):
         return False
 
 
+def select_dlls(binaries, prefix, only):
+    dlls = sorted(binaries.glob(prefix + "*.dll"))
+    if only:
+        wanted = {prefix + m + ".dll" for m in only}
+        dlls = [d for d in dlls if d.name in wanted]
+    return dlls
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Run REA's Ghidra procedure search for imported names on every engine module DLL, one JSON per DLL, resumable."
@@ -53,10 +61,7 @@ def main():
     args.out.mkdir(parents=True, exist_ok=True)
     env = rea_environment(args)
 
-    dlls = sorted(args.binaries.glob(args.prefix + "*.dll"))
-    if args.only:
-        wanted = {args.prefix + m + ".dll" for m in args.only}
-        dlls = [d for d in dlls if d.name in wanted]
+    dlls = select_dlls(args.binaries, args.prefix, args.only)
 
     failures = []
     for index, dll in enumerate(dlls, 1):
