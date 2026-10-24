@@ -7,3 +7,6 @@
 | [0003](0003-source-assets-no-container.md) | Source assets stay as source files, no proprietary container | Proposed |
 | [0004](0004-cpp-and-dear-imgui.md) | C++ with Dear ImGui docking for the editor | Proposed |
 | [0005](0005-single-editor-mode.md) | One editor mode | Proposed |
+| [0006](0006-apache-2-licence.md) | Apache-2.0 licence | Proposed |
+| [0007](0007-vulkan-first.md) | Vulkan only at first | Proposed |
+| [0008](0008-jolt-physics.md) | Jolt Physics | Proposed |
