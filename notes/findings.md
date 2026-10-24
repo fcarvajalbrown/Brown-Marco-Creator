@@ -116,3 +116,8 @@ Checked 2026-10-24 on the desktop (the machine this session ran on). The Phase 1
 Because the batch cannot run, Phase 1 steps 2 (read the `finished:` line and errors) and 3 (retry failed modules) have no output to act on and are also blocked.
 
 Unblock: install Ghidra 12.1.4 and JDK 21 under `C:\tools` and mount/populate the UE 5.5 engine at `D:\EpicGames\UE_5.5` (or, if the install moved, update the paths in `ROADMAP.md`, `README.md` and `tools/rea-imports/rea_imports.py` defaults), then rerun `python -I tools/rea-imports/rea_imports.py --binaries 'D:/EpicGames/UE_5.5/Engine/Binaries/Win64' --out snapshots/imports` with `GHIDRA_HEADLESS_MAXMEM=4G`. Not attempted this session: installing the engine or the toolchain is a large, machine-changing step that needs Felipe's decision.
+
+## Import batch on UE 4.27.2
+
+- Prerequisites present on the desktop: Ghidra 12.1.4 and JDK 21.0.12.1+1 in `C:\tools`, UE 4.27.2 at `C:\Program Files\Epic Games\UE_4.27`. `Engine\Binaries\Win64` holds 398 `UE4Editor-*.dll` module DLLs (UE 5.5 had 498 `UnrealEditor-*.dll`); the count held steady over five minutes before the batch started.
+- Started the Phase 1 batch with `GHIDRA_HEADLESS_MAXMEM=4G`, `--prefix UE4Editor-`, output to `snapshots/imports-ue4.27` with progress in `batch.log` there; 19 GB RAM and 94 GB disk free at start.
