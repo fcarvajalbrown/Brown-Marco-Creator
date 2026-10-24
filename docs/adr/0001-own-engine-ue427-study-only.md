@@ -6,7 +6,7 @@
 
 ## Context
 
-Felipe loves Unreal Engine 4.27 and wants it "deconstructed but made my own, remove all the grease and maintain for newer game exports needs". His reasons: UE 5.5 asks too much of most players' hardware, and Epic plans to deprecate Blueprints in UE6 ([research](../research/ue6-blueprints.md)). The UE 4.27.2 launcher install on his desktop ships DLLs and headers, not engine source. The `ue55-rea` repo already studies those DLLs with REA. Minga3D follows the same pattern for SketchUp.
+Felipe loves Unreal Engine 4.27 and wants it "deconstructed but made my own, remove all the grease and maintain for newer game exports needs". His reasons: UE 5.5 asks too much of most players' hardware, and Epic plans to deprecate Blueprints in UE6 ([research](../research/ue6-blueprints.md)). The UE 4.27.2 launcher install on his desktop ships DLLs and headers, not engine source. The REA study in `study/ue427-rea/` already maps those DLLs. Minga3D follows the same pattern for SketchUp.
 
 ## Decision
 
@@ -16,7 +16,7 @@ Brown Marco Creator is a new engine written from scratch. UE 4.27 is study mater
 
 - Every behaviour taken from 4.27 is learned through REA, the editor or Epic's docs, never copied.
 - The engine is free to differ from 4.27 internally wherever the workflow stays the same.
-- The `ue55-rea` import graph and module study feed phase A.
+- The `study/ue427-rea` import graph and module study feed phase A.
 
 ## Alternatives considered
 

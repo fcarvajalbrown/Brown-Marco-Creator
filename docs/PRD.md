@@ -35,7 +35,7 @@ A phase ends on a check that has to pass. Status lives in `ROADMAP.md`. Order is
 
 ### A. Study UE 4.27 with REA
 
-The module import graph and per-module study run in `ue55-rea` (`fcarvajalbrown/ue55-rea`). Here: a note per kept feature in `docs/research/ue427/`, then a cut list of what 4.27 carries that this engine drops.
+The module import graph and per-module study run in `study/ue427-rea/`. Here: a note per kept feature in `docs/research/ue427/`, then a cut list of what 4.27 carries that this engine drops.
 
 Exit: a note per kept feature and a cut list, each claim tagged as found by REA, observed in the 4.27 editor, or read in Epic's docs.
 

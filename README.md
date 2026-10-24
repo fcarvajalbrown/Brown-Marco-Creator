@@ -37,7 +37,7 @@ Everything else in 4.27 gets studied first and cut only after that.
 
 ## Status
 
-Planning. Scope, phases and decisions are written down; no engine code yet. The study of the UE 4.27 binaries runs in [ue55-rea](https://github.com/fcarvajalbrown/ue55-rea).
+Planning. Scope, phases and decisions are written down; no engine code yet. The study of the UE 4.27 binaries runs in [study/ue427-rea](study/ue427-rea/README.md).
 
 - Roadmap: [ROADMAP.md](ROADMAP.md)
 - Product requirements and phases: [docs/PRD.md](docs/PRD.md)

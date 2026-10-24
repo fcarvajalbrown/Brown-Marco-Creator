@@ -1,6 +1,6 @@
 # Brown Marco Creator
 
-Felipe's own game engine and editor with UE 4.27's workflow, written from scratch in C++ with Dear ImGui. UE 4.27 is study material only; no Epic code comes in. The REA study of the 4.27 DLLs lives in `C:\Projects\ue55-rea` (`fcarvajalbrown/ue55-rea`).
+Felipe's own game engine and editor with UE 4.27's workflow, written from scratch in C++ with Dear ImGui. UE 4.27 is study material only; no Epic code comes in. The REA study of the 4.27 DLLs lives in `study/ue427-rea/` in this repo.
 
 ## Session start
 

@@ -11,13 +11,13 @@ Phases are ordered dependency first.
 - Vulkan SDK (or fetched Vulkan-Headers plus a loader such as volk) for the phase B build — Blocked on Felipe: not installed on the desktop, setup not approved; CMake 4 and Visual Studio are present — phase B
 - UE 4.27 feature notes from Epic's docs — Done for every kept feature (24 notes); 4.27 Modeling Tools behaviour still needs REA or the editor — [docs/research/ue427](docs/research/ue427/README.md) — phase A
 - UE 4.27 cut list — candidates drafted, Blocked on Felipe's review — [cut-list-candidates.md](docs/research/ue427/cut-list-candidates.md) — phase A
-- UE 4.27 module import graph — In Progress in `ue55-rea` (Phase 1 batch) — phase A
+- UE 4.27 module import graph — Done for the 398 core modules, 0 failed; plugin modules deferred (essentials only) — [study/ue427-rea](study/ue427-rea/ROADMAP.md) — phase A
 
 ## Phases
 
 | Phase | Status | Shaped by |
 |---|---|---|
-| A. Study UE 4.27 with REA | In Progress (in `ue55-rea`) | ADR [0001](docs/adr/0001-own-engine-ue427-study-only.md), [0002](docs/adr/0002-scope-and-platforms.md) |
+| A. Study UE 4.27 with REA | In Progress (in `study/ue427-rea`) | ADR [0001](docs/adr/0001-own-engine-ue427-study-only.md), [0002](docs/adr/0002-scope-and-platforms.md) |
 | B. Workspace and editor shell | Blocked on Vulkan SDK setup | ADR [0004](docs/adr/0004-cpp-and-dear-imgui.md), [0009](docs/adr/0009-cmake.md), [0011](docs/adr/0011-sdl3.md) |
 | C. Core and source-asset registry | Not Started | ADR [0003](docs/adr/0003-source-assets-no-container.md), [0010](docs/adr/0010-asset-cache-and-sidecars.md) |
 | D. Renderer | Not Started | ADR [0002](docs/adr/0002-scope-and-platforms.md), [0007](docs/adr/0007-vulkan-first.md) |

@@ -1,11 +1,11 @@
-ue55-rea: how to run the import batch and get back to Claude
+UE 4.27 REA study: how to run the import batch and get back to Claude
 
-The desktop shortcut "ue55-rea" opens this folder (C:\Projects\ue55-rea).
+Open this folder: C:ProjectsBrown-Marco-CreatorstudyE427-rea.
 
 1. Open Git Bash in this folder
    Right-click an empty spot in the folder and pick "Open Git Bash here".
    If that entry is missing, open Git Bash from the Start menu and type:
-   cd /c/Projects/ue55-rea
+   cd /c/Projects/Brown-Marco-Creator/study/ue427-rea
 
 2. Check free RAM first (5 GB or more for the 4 GB heap)
    powershell -NoProfile -Command '$o=Get-CimInstance Win32_OperatingSystem; "{0:N1} GB free" -f ($o.FreePhysicalMemory/1MB)'

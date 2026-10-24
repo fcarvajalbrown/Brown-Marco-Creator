@@ -1,4 +1,4 @@
-# ue55-rea
+# UE 4.27 REA study (formerly ue55-rea)
 
 Study of Unreal Engine from its installed DLLs, with every fact taken through REA and Ghidra. The project switched from UE 5.5 to **UE 4.27.2**, installed at `C:\Program Files\Epic Games\UE_4.27`; its module DLLs are in `Engine\Binaries\Win64` and are named `UE4Editor-*.dll` (UE 5 uses `UnrealEditor-*.dll`). The repo keeps the name `ue55-rea`. The long-term aim is to find legacy code worth removing. That removal needs Epic's full GitHub source, which this install does not have: the launcher ships headers and DLLs only.
 
@@ -66,7 +66,7 @@ Start it:
 ! GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27
 ```
 
-To keep it independent of the session, open Git Bash yourself, `cd /c/Projects/ue55-rea`, and run the same line without the `!`. Progress then prints in that window as `[n/N] Module ok 54s`. `--prefix` defaults to `UnrealEditor-` for UE 5 installs; UE 4 needs `--prefix UE4Editor-`. Keep the heap at 4G, never higher.
+To keep it independent of the session, open Git Bash yourself, `cd /c/Projects/Brown-Marco-Creator/study/ue427-rea`, and run the same line without the `!`. Progress then prints in that window as `[n/N] Module ok 54s`. `--prefix` defaults to `UnrealEditor-` for UE 5 installs; UE 4 needs `--prefix UE4Editor-`. Keep the heap at 4G, never higher.
 
 Check progress from the prompt:
 

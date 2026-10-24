@@ -9,5 +9,5 @@ Sources: the UE 4.27.2 install's plugin descriptors `Engine/Plugins/Experimental
 
 ## For Brown Marco Creator
 
-Phase L. The user guide page for 4.27 is not found yet; the tool list (auto UV and others) should come from REA on `UE4Editor-MeshModelingTools.dll` once the plugin batch runs in `ue55-rea`.
+Phase L. The user guide page for 4.27 is not found yet; the tool list (auto UV and others) should come from REA on `UE4Editor-MeshModelingTools.dll` if the deferred plugin batch runs in `study/ue427-rea`.
 
