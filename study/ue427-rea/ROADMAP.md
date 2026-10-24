@@ -4,7 +4,7 @@ Goal: learn how Unreal Engine works from its installed DLLs, every fact through 
 
 Engine version: the project switched from UE 5.5 to **UE 4.27.2**, installed at `C:\Program Files\Epic Games\UE_4.27` (module DLLs in `Engine\Binaries\Win64`, named `UE4Editor-*.dll`). The repo keeps its name `ue55-rea`. UE 5.5 results recorded before the switch stay in `notes/findings.md` for reference.
 
-Commands run from `C:\Projects\ue55-rea` at the `!` prompt (Git Bash), one line per action. Outputs go to `snapshots/` (git-ignored).
+Commands run from `C:\Projects\Brown-Marco-Creator\study\ue427-rea` at the `!` prompt (Git Bash), one line per action. Outputs go to `snapshots/` (git-ignored).
 
 ## Open items
 

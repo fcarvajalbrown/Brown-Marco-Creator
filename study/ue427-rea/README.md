@@ -12,7 +12,7 @@ Study of Unreal Engine from its installed DLLs, with every fact taken through RE
 
 ## Before running anything
 
-- Run every command from `C:\Projects\ue55-rea`. The commands fetch `rea-agents@6.7.0` from npm, so the REA source checkout at `C:\Projects\rea` is only there to read REA's docs. Never run REA commands from inside it: there `npx rea-agents@6.7.0` picks up the checkout's own package and fails with "'rea' is not recognized".
+- Run every command from `C:\Projects\Brown-Marco-Creator\study\ue427-rea`. The commands fetch `rea-agents@6.7.0` from npm, so the REA source checkout at `C:\Projects\rea` is only there to read REA's docs. Never run REA commands from inside it: there `npx rea-agents@6.7.0` picks up the checkout's own package and fails with "'rea' is not recognized".
 - The `!` prompt is Git Bash, not cmd or PowerShell. Environment variables go in front of the command (`NAME=value command`), and `cmd /c` gets mangled into a drive path; use `cmd.exe //d //c` if you ever need it.
 - Windows flags like `/F` get rewritten by Git Bash. Prefix the command with `MSYS_NO_PATHCONV=1`, or put the whole thing inside a single-quoted PowerShell string as in the pause command below.
 - A command that runs longer than 120 s at the `!` prompt moves to the background on its own. It keeps running, but it stops if the session closes. For the long batch, a separate Git Bash window is safer (see below).
