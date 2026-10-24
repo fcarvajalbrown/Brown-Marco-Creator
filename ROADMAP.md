@@ -13,7 +13,7 @@ Phases are ordered dependency first.
 - UE 4.27 cut list — candidates drafted, Blocked on Felipe's review — [cut-list-candidates.md](docs/research/ue427/cut-list-candidates.md) — phase A
 - UE 4.27 module import graph — Done for the 398 core modules, 0 failed; plugin modules deferred (essentials only) — [study/ue427-rea](study/ue427-rea/ROADMAP.md) — phase A
 - UE 4.27 dependency-first study order — Done: 398 core modules, 18 layers — [study-order.md](study/ue427-rea/notes/study-order.md) — phase A
-- UE 4.27 core module study with REA, in that order — In Progress: name survey running — [study phase 5](study/ue427-rea/ROADMAP.md#phase-5-study-in-progress) — phase A
+- UE 4.27 core module study with REA, in that order — In Progress: name survey at 121 of 398, 0 failed, [module surface](study/ue427-rea/notes/module-surface.md) — [study phase 5](study/ue427-rea/ROADMAP.md#phase-5-study-in-progress) — phase A
 
 ## Phases
 

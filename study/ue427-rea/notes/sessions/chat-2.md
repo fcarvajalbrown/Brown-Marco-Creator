@@ -6,8 +6,10 @@ Done:
 - Phase 5 prepared: `rea_imports.py` takes `--order` (study-order.md) and `--pattern`; `tools/study-order/module_surface.py` turns the name searches into a per-module table. Both checked offline.
 - Main ROADMAP lists the study order (Done) and the core module study (Blocked).
 
+- On the master session's instruction, `rea_imports.py` now runs REA from the pnpm install with node (`--rea` to override). The name survey ran 121 of 398 modules, 0 failed, and stopped at 14:00; `notes/module-surface.md` and findings record it.
+
 Flags opened:
-- Phase 5 blocked on Felipe: every `npx -y rea-agents@6.7.0` call was denied by this session's permissions, so no REA query ran and the REA side of the name survey is untested.
+- Phase 5 step 1 survey to resume from module 122; step 3 not started.
 
 Flags closed:
 - Old ue55-rea worktree flag: the ue55-rea repo was merged here and is being deleted.

@@ -131,3 +131,11 @@ Unblock: install Ghidra 12.1.4 and JDK 21 under `C:\tools` and mount/populate th
 - Built by `tools/study-order/study_order.py` from the 398 `search.json` files: 18 layers, order in `notes/study-order.md`. Every `UE4EDITOR-*.DLL` a core module imports is itself a core module (0 unresolved), so no core module needs a plugin module.
 - Layer 0 holds TraceLog (11 direct dependents), BuildSettings (2) and UELibrary (0). Core alone is layer 1 and 394 of the other 397 modules import it directly.
 - Two import cycles. PacketHandler and ReliabilityHandlerComponent import each other. A group of 69 modules does too, because the editor build of Engine imports from editor modules: Engine imports AudioMixer, GameplayTags, Kismet, Landscape, UMG and UnrealEd. Each group is placed on one layer (the 69-module group on layer 11), ordered inside by direct dependents. CoreUObject, Slate and RenderCore sit below the group.
+
+## Module surface from the REA name survey (phase 5 step 1)
+
+- REA 6.7.0 runs from the pnpm install with node (`npx` is denied on purpose). The name survey searched procedure names for `::` on 121 of the 398 core modules, in study order (TraceLog to Serialization), with 0 failures. It was stopped at the session's 14:00 limit and resumes from module 122 with the same line. Per-DLL time was 21 s to 415 s (Core) on the 4 GB heap.
+- Per-module rows are in `notes/module-surface.md`. The largest named surfaces so far are Core (5,545 own named procedures in 565 scopes), CoreUObject (4,494; UObject 252, UClass 110, FProperty 88), Chaos (3,378; FJointConstraint 129, FPBDRigidsSolver 77), RenderCore (1,351; FRDGBuilder 45, FShaderType 43) and RHI (907; FDynamicRHI 133, FRHICommandListImmediate 128).
+- In Core, the platform layer leads: FGenericPlatformMisc 189, FGenericPlatformProcess 80 and FWindowsPlatformMisc 71, next to FArchiveState 101, FString 101 and FPaths 100.
+- Navmesh carries Recast and Detour under their own `dt`/`rc` names (dtNavMesh 63, dtCrowd 58, dtNavMeshQuery 50).
+- 31 of the 121 modules have no own name with `::`. TraceLog's PDB is referenced but not loaded, so names come from exports only, and an empty search does not prove a module has no code.

@@ -14,7 +14,7 @@ Commands run from `C:\Projects\Brown-Marco-Creator\study\ue427-rea` at the `!` p
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
 | 4 | Build the dependency-first study order from the imports | Done: 398 modules in 18 layers, [notes/study-order.md](notes/study-order.md) |
-| 5 | Study modules in that order with REA | In Progress: step 1 name survey running |
+| 5 | Study modules in that order with REA | In Progress: step 1 name survey at 121 of 398, 0 failed; rerun the step 1 line to resume |
 
 Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fails.
 
