@@ -28,3 +28,4 @@ One note per feature kept in [ADR 0002](../../adr/0002-scope-and-platforms.md). 
 | Working with content | [content-pipeline.md](content-pipeline.md) |
 | World Outliner | [world-outliner.md](world-outliner.md) |
 | Modeling Tools mode | [modeling-tools.md](modeling-tools.md) |
+| Cut-list candidates (for Felipe's review) | [cut-list-candidates.md](cut-list-candidates.md) |
