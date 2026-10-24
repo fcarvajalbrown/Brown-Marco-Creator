@@ -12,6 +12,8 @@ Phases are ordered dependency first.
 - UE 4.27 feature notes from Epic's docs — Done for every kept feature (24 notes); 4.27 Modeling Tools behaviour still needs REA or the editor — [docs/research/ue427](docs/research/ue427/README.md) — phase A
 - UE 4.27 cut list — candidates drafted, Blocked on Felipe's review — [cut-list-candidates.md](docs/research/ue427/cut-list-candidates.md) — phase A
 - UE 4.27 module import graph — Done for the 398 core modules, 0 failed; plugin modules deferred (essentials only) — [study/ue427-rea](study/ue427-rea/ROADMAP.md) — phase A
+- UE 4.27 dependency-first study order — Done: 398 core modules, 18 layers — [study-order.md](study/ue427-rea/notes/study-order.md) — phase A
+- UE 4.27 core module study with REA, in that order — In Progress — [findings](study/ue427-rea/notes/findings.md) — phase A
 
 ## Phases
 

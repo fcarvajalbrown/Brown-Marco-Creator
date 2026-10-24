@@ -125,3 +125,9 @@ Unblock: install Ghidra 12.1.4 and JDK 21 under `C:\tools` and mount/populate th
 - Scope gap: the batch covers only `Engine\Binaries\Win64` (398 core modules). Plugin modules live under `Engine\Plugins\**\Binaries\Win64` and add 654 more (all names unique) `UE4Editor-*.dll`, for example the beta Modeling Tools Editor Mode (`UE4Editor-ModelingToolsEditorMode.dll`, `-MeshModelingTools.dll`, `-ModelingComponents.dll`, `-ModelingOperators.dll`). `rea_imports.py` takes one folder and now takes `--recursive` for them.
 - The desktop rebooted for a Windows Update at 03:50 while the batch was already paused; nothing was lost. Resumed at 04:57 Chile time after the DiariZen run and Candil's CPU timing, same command, 22 GB RAM free.
 - Phase 1 batch finished at 11:49 Chile time: `finished: 398 ok, 0 failed []`. 398 `search.json` files in `snapshots/imports-ue4.27`, no `error.txt`, so step 3 (retry failed modules) had nothing to retry. Per-DLL time ranged from about 23 s to 229 s on the 4 GB heap.
+
+## Study order from the UE 4.27 core imports
+
+- Built by `tools/study-order/study_order.py` from the 398 `search.json` files: 18 layers, order in `notes/study-order.md`. Every `UE4EDITOR-*.DLL` a core module imports is itself a core module (0 unresolved), so no core module needs a plugin module.
+- Layer 0 holds TraceLog (11 direct dependents), BuildSettings (2) and UELibrary (0). Core alone is layer 1 and 394 of the other 397 modules import it directly.
+- Two import cycles. PacketHandler and ReliabilityHandlerComponent import each other. A group of 69 modules does too, because the editor build of Engine imports from editor modules: Engine imports AudioMixer, GameplayTags, Kismet, Landscape, UMG and UnrealEd. Each group is placed on one layer (the 69-module group on layer 11), ordered inside by direct dependents. CoreUObject, Slate and RenderCore sit below the group.

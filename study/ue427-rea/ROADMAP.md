@@ -13,8 +13,8 @@ Commands run from `C:\Projects\Brown-Marco-Creator\study\ue427-rea` at the `!` p
 | 1 | Get each module DLL's imports through `rea search` | Done: 398 core modules, 0 failed (plugin modules deferred by Felipe: essentials only) |
 | 2 | Get imports through `rea inspect-with-objdump` | Not Started |
 | 3 | Get imports through MCP, one DLL at a time | Not Started |
-| 4 | Build the dependency-first study order from the imports | Not Started |
-| 5 | Study modules in that order with REA | Not Started |
+| 4 | Build the dependency-first study order from the imports | Done: 398 modules in 18 layers, [notes/study-order.md](notes/study-order.md) |
+| 5 | Study modules in that order with REA | In Progress |
 
 Phases 1 to 3 are tried in order; a later phase runs only if the earlier one fails.
 
@@ -54,10 +54,12 @@ The route verified on Core. Claude runs these REA calls in the conversation; you
 3. Claude tallies the external names per library and records them in `notes/findings.md`.
 4. `close_binary`.
 
-## Phase 4: study order (Not Started)
+## Phase 4: study order (Done)
 
-Layer the modules bottom-up from the REA import data; within a layer, most-depended-on first. The order is written here only after the data exists.
+Layer the modules bottom-up from the REA import data; within a layer, most-depended-on first. Modules that import each other form one group on one layer. Rebuild (seconds; rerun the same line to redo):
+`! python -I tools/study-order/study_order.py --imports snapshots/imports-ue4.27 --out notes/study-order.md`
+Check: `! cd tools/study-order && python test_study_order.py`
 
-## Phase 5: study (Not Started)
+## Phase 5: study (In Progress)
 
 Per module, in order: `search_procedures`, `analyze_function`, `procedure_pseudo_code`, `get_call_graph`, `xrefs` on named exports; findings to `notes/findings.md`.
