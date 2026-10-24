@@ -1,6 +1,6 @@
 # Unreal Engine study with REA: roadmap
 
-Goal: learn how Unreal Engine works from its installed DLLs, every fact through REA, then find legacy bloat. Findings: `notes/findings.md`. Finished items: `docs/ROADMAP-HISTORY.md`.
+Goal: learn how Unreal Engine works from its installed DLLs, every fact through REA, then find legacy bloat. The study feeds Brown Marco Creator (`fcarvajalbrown/Brown-Marco-Creator`, phase A), Felipe's own engine with the 4.27 workflow. Findings: `notes/findings.md`. Finished items: `docs/ROADMAP-HISTORY.md`.
 
 Engine version: the project switched from UE 5.5 to **UE 4.27.2**, installed at `C:\Program Files\Epic Games\UE_4.27` (module DLLs in `Engine\Binaries\Win64`, named `UE4Editor-*.dll`). The repo keeps its name `ue55-rea`. UE 5.5 results recorded before the switch stay in `notes/findings.md` for reference.
 
