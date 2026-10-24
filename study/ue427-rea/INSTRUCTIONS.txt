@@ -1,0 +1,28 @@
+ue55-rea: how to run the import batch and get back to Claude
+
+The desktop shortcut "ue55-rea" opens this folder (C:\Projects\ue55-rea).
+
+1. Open Git Bash in this folder
+   Right-click an empty spot in the folder and pick "Open Git Bash here".
+   If that entry is missing, open Git Bash from the Start menu and type:
+   cd /c/Projects/ue55-rea
+
+2. Check free RAM first (5 GB or more for the 4 GB heap)
+   powershell -NoProfile -Command '$o=Get-CimInstance Win32_OperatingSystem; "{0:N1} GB free" -f ($o.FreePhysicalMemory/1MB)'
+
+3. Start or resume the batch (finished DLLs are skipped)
+   GHIDRA_HEADLESS_MAXMEM=4G python -I tools/rea-imports/rea_imports.py --binaries 'C:/Program Files/Epic Games/UE_4.27/Engine/Binaries/Win64' --prefix UE4Editor- --out snapshots/imports-ue4.27
+
+   Each line it prints looks like: [85/N] ChaosVehiclesEngine ok 53s
+   Leave the window open until it prints the "finished:" line.
+
+4. Pause it (from another Git Bash window)
+   powershell -NoProfile -Command 'Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -match "rea_imports" -and $_.Name -eq "python.exe" } | ForEach-Object { taskkill /T /F /PID $_.ProcessId }'
+   To resume, run step 3 again. The DLL that was in progress starts over.
+
+5. Get back to Claude in this project
+   In a Git Bash window in this folder:
+   claude --continue
+   This reopens the last conversation for this folder. Paste the "finished:" line there.
+
+More detail: README.md (every command) and ROADMAP.md (the phases).
