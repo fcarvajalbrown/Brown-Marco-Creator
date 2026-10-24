@@ -8,6 +8,7 @@ Phases are ordered dependency first.
 ## Open items
 
 - ADRs 0001 to 0010 drafted from Felipe's answers — Proposed, awaiting Felipe's acceptance — [docs/adr](docs/adr/README.md)
+- Window and input library ADR (for example SDL3 or GLFW) — Blocked on Felipe — phase B
 - UE 4.27 module import graph — In Progress in `ue55-rea` (Phase 1 batch) — phase A
 
 ## Phases
@@ -15,7 +16,7 @@ Phases are ordered dependency first.
 | Phase | Status | Shaped by |
 |---|---|---|
 | A. Study UE 4.27 with REA | In Progress (in `ue55-rea`) | ADR [0001](docs/adr/0001-own-engine-ue427-study-only.md), [0002](docs/adr/0002-scope-and-platforms.md) |
-| B. Workspace and editor shell | Not Started | ADR [0004](docs/adr/0004-cpp-and-dear-imgui.md), [0009](docs/adr/0009-cmake.md) |
+| B. Workspace and editor shell | Blocked on window library ADR | ADR [0004](docs/adr/0004-cpp-and-dear-imgui.md), [0009](docs/adr/0009-cmake.md) |
 | C. Core and source-asset registry | Not Started | ADR [0003](docs/adr/0003-source-assets-no-container.md), [0010](docs/adr/0010-asset-cache-and-sidecars.md) |
 | D. Renderer | Not Started | ADR [0002](docs/adr/0002-scope-and-platforms.md), [0007](docs/adr/0007-vulkan-first.md) |
 | E. Editor panels | Not Started | ADR [0003](docs/adr/0003-source-assets-no-container.md), [0005](docs/adr/0005-single-editor-mode.md) |
