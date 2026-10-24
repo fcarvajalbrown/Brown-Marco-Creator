@@ -9,7 +9,7 @@ Phases are ordered dependency first.
 
 - ADRs 0001 to 0011 drafted from Felipe's answers — Proposed, awaiting Felipe's acceptance — [docs/adr](docs/adr/README.md)
 - Vulkan SDK (or fetched Vulkan-Headers plus a loader such as volk) for the phase B build — Blocked on Felipe: not installed on the desktop, setup not approved; CMake 4 and Visual Studio are present — phase B
-- UE 4.27 feature notes from Epic's docs — In Progress, 18 written, 5 to find — [docs/research/ue427](docs/research/ue427/README.md) — phase A
+- UE 4.27 feature notes from Epic's docs — In Progress, 22 written, 2 to find — [docs/research/ue427](docs/research/ue427/README.md) — phase A
 - UE 4.27 module import graph — In Progress in `ue55-rea` (Phase 1 batch) — phase A
 
 ## Phases
