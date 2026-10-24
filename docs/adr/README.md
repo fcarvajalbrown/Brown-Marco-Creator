@@ -12,3 +12,4 @@
 | [0008](0008-jolt-physics.md) | Jolt Physics | Proposed |
 | [0009](0009-cmake.md) | CMake | Proposed |
 | [0010](0010-asset-cache-and-sidecars.md) | Rebuildable asset cache and plain-text import sidecars | Proposed |
+| [0011](0011-sdl3.md) | SDL3 for windowing and input | Proposed |
